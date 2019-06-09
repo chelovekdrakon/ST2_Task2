@@ -134,6 +134,24 @@ typedef enum {
 
 #pragma mark - UITableViewDelegate Protocol
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath  API_AVAILABLE(ios(11.0)) {
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        
+        NSMutableArray *sectionContent = self.sectionsContent[indexPath.section];
+        [sectionContent removeObjectAtIndex:indexPath.row];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        
+        [self.tableView setEditing:NO animated:YES];
+    }];
+    
+    NSArray *actions = @[deleteAction];
+    
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:actions];
+    
+    return config;
+}
+
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     SectionHeaderView *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:sectionCellReuseId];
     headerView.delegate = self;
