@@ -10,6 +10,8 @@
 
 @interface ContactsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray <NSArray *> *model;
 @property (weak, nonatomic) UIView *warningView;
+
+@property (strong, nonatomic) NSMutableArray <NSString *> *sectionsModel;
+@property (strong, nonatomic) NSMutableArray <NSMutableArray *> *sectionsContent;
 @end

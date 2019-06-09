@@ -20,6 +20,9 @@ NSString * const defaultCellReuseId = @"default";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.sectionsModel = [NSMutableArray new];
+    self.sectionsContent = [NSMutableArray new];
+    
     self.navigationItem.title = @"Контакты";
     
     UIView *warningView = [self getWarningView];
@@ -27,7 +30,6 @@ NSString * const defaultCellReuseId = @"default";
     
     [self fetchContacts];
     
-    self.model = @[];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:defaultCellReuseId];
     self.tableView.tableFooterView = [UIView new];
 }
@@ -36,7 +38,42 @@ NSString * const defaultCellReuseId = @"default";
     CNContactStore *store = [[CNContactStore alloc] init];
     [store requestAccessForEntityType:CNEntityTypeContacts completionHandler:^(BOOL granted, NSError * _Nullable error) {
         if (granted) {
-            // hello
+            NSArray *keys = @[CNContactFamilyNameKey, CNContactGivenNameKey, CNContactPhoneNumbersKey, CNContactImageDataKey];
+            CNContactFetchRequest *request = [[CNContactFetchRequest alloc] initWithKeysToFetch:keys];
+            NSError *error;
+            
+            NSMutableDictionary *contacts = [NSMutableDictionary new];
+            
+            BOOL success = [store enumerateContactsWithFetchRequest:request error:&error usingBlock:^(CNContact * __nonnull contact, BOOL * __nonnull stop) {
+                if (error) {
+                    NSLog(@"error fetching contacts %@", error);
+                } else {
+                    NSString *letter = [contact.familyName substringToIndex:1];
+                    NSMutableArray *sectionModel = [contacts objectForKey:letter];
+                    
+                    if (!sectionModel) {
+                        sectionModel = [NSMutableArray new];
+                        [contacts setObject:sectionModel forKey:letter];
+                    }
+                    
+                    [sectionModel addObject:contact];
+                }
+            }];
+            
+            for (NSString *key in contacts) {
+                [self.sectionsModel addObject:key];
+            }
+            
+            [self.sectionsModel sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                return [obj1 compare:obj2];
+            }];
+            
+            for (NSString *key in self.sectionsModel) {
+                NSMutableArray *sectionContent = [contacts objectForKey:key];
+                [self.sectionsContent addObject:sectionContent];
+            }
+            
+            [self.tableView reloadData];
         } else {
             [self.view addSubview:self.warningView];
         }
@@ -63,12 +100,12 @@ NSString * const defaultCellReuseId = @"default";
 #pragma mark - UITableViewDataSource Protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.model count];
+    return [self.sectionsModel count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *sectionModel = self.model[section];
-    return sectionModel.count;
+    NSMutableArray *sectionContent = self.sectionsContent[section];
+    return sectionContent.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
