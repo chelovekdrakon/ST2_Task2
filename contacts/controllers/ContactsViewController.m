@@ -6,13 +6,20 @@
 //  Copyright © 2019 Фёдор Морев. All rights reserved.
 //
 
-#import "ContactsViewController.h"
 #import <Contacts/Contacts.h>
 
+#import "ContactsViewController.h"
+#import "SectionHeaderView.h"
+
 NSString * const defaultCellReuseId = @"default";
+NSString * const sectionCellReuseId = @"default";
+typedef enum {
+    CLOSED = 0,
+    OPENED = 1
+} SectionState;
 
-@interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource>
-
+@interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource, SectionHeaderViewProtocol>
+@property (strong, nonatomic) NSMutableArray *sectionsModelState;
 @end
 
 @implementation ContactsViewController
@@ -22,6 +29,7 @@ NSString * const defaultCellReuseId = @"default";
     
     self.sectionsModel = [NSMutableArray new];
     self.sectionsContent = [NSMutableArray new];
+    self.sectionsModelState = [NSMutableArray new];
     
     self.navigationItem.title = @"Контакты";
     
@@ -31,6 +39,7 @@ NSString * const defaultCellReuseId = @"default";
     [self fetchContacts];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:defaultCellReuseId];
+    [self.tableView registerClass:[SectionHeaderView class] forHeaderFooterViewReuseIdentifier:sectionCellReuseId];
     self.tableView.tableFooterView = [UIView new];
 }
 
@@ -71,6 +80,7 @@ NSString * const defaultCellReuseId = @"default";
             for (NSString *key in self.sectionsModel) {
                 NSMutableArray *sectionContent = [contacts objectForKey:key];
                 [self.sectionsContent addObject:sectionContent];
+                [self.sectionsModelState addObject:@(OPENED)];
             }
             
             [self.tableView reloadData];
@@ -78,6 +88,31 @@ NSString * const defaultCellReuseId = @"default";
             [self.view addSubview:self.warningView];
         }
     }];
+}
+
+#pragma mark - SectionHeaderView Protocol
+
+- (void)onSectionTap:(SectionHeaderView *)headerView {
+    NSUInteger section = headerView.section;
+    
+    SectionState state = [self.sectionsModelState[section] intValue];
+    SectionState nextState = state == OPENED ? CLOSED : OPENED;
+    
+    self.sectionsModelState[section] = @(nextState);
+    
+    NSMutableArray *paths = [NSMutableArray new];
+    
+    NSMutableArray *sectionContent = self.sectionsContent[section];
+    for (int index = 0; index < [sectionContent count]; index++) {
+        NSIndexPath *path = [NSIndexPath indexPathForRow:index inSection:section];
+        [paths addObject:path];
+    }
+    
+    if (nextState == OPENED) {
+        [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else {
+        [self.tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 #pragma mark - UI Generators
@@ -97,6 +132,18 @@ NSString * const defaultCellReuseId = @"default";
     return view;
 }
 
+#pragma mark - UITableViewDelegate Protocol
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    SectionHeaderView *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:sectionCellReuseId];
+    headerView.delegate = self;
+    headerView.section = section;
+    
+    headerView.textLabel.text = self.sectionsModel[section];
+    
+    return headerView;
+}
+
 #pragma mark - UITableViewDataSource Protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -104,13 +151,24 @@ NSString * const defaultCellReuseId = @"default";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSMutableArray *sectionContent = self.sectionsContent[section];
-    return sectionContent.count;
+    SectionState state = [self.sectionsModelState[section] intValue];
+    
+    if (state == OPENED) {
+        NSMutableArray *sectionContent = self.sectionsContent[section];
+        return sectionContent.count;
+    } else {
+        return 0;
+    }
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"");
-    return nil;
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:defaultCellReuseId forIndexPath:indexPath];
+    CNContact *contact = self.sectionsContent[indexPath.section][indexPath.row];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", contact.givenName, contact.familyName];
+    
+    return cell;
 }
 
 @end

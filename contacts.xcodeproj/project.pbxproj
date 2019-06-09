@@ -14,6 +14,7 @@
 		32E0B76122AD0F7A00213759 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E0B75F22AD0F7A00213759 /* ContactsViewController.m */; };
 		32E0B76222AD0F7A00213759 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32E0B76022AD0F7A00213759 /* ContactsViewController.xib */; };
 		32E0B76422AD106700213759 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E0B76322AD106700213759 /* LaunchScreen.storyboard */; };
+		32E0B76A22AD5B5E00213759 /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E0B76922AD5B5E00213759 /* SectionHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		32E0B75F22AD0F7A00213759 /* ContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		32E0B76022AD0F7A00213759 /* ContactsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
 		32E0B76322AD106700213759 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		32E0B76822AD5B5E00213759 /* SectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
+		32E0B76922AD5B5E00213759 /* SectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,7 @@
 		326F454022AB8AEA008E9580 /* contacts */ = {
 			isa = PBXGroup;
 			children = (
+				32E0B76722AD5ACA00213759 /* components */,
 				32E0B72F22AD076600213759 /* controllers */,
 				326F454122AB8AEA008E9580 /* AppDelegate.h */,
 				326F454222AB8AEA008E9580 /* AppDelegate.m */,
@@ -82,6 +86,15 @@
 				32E0B75C22AD0ECF00213759 /* NavigationController.m */,
 			);
 			path = controllers;
+			sourceTree = "<group>";
+		};
+		32E0B76722AD5ACA00213759 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				32E0B76822AD5B5E00213759 /* SectionHeaderView.h */,
+				32E0B76922AD5B5E00213759 /* SectionHeaderView.m */,
+			);
+			path = components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,6 +170,7 @@
 				32E0B75D22AD0ECF00213759 /* NavigationController.m in Sources */,
 				32E0B76122AD0F7A00213759 /* ContactsViewController.m in Sources */,
 				326F455122AB8AEB008E9580 /* main.m in Sources */,
+				32E0B76A22AD5B5E00213759 /* SectionHeaderView.m in Sources */,
 				326F454322AB8AEA008E9580 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
