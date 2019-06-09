@@ -157,40 +157,6 @@ typedef enum {
     return @[deleteAction];
 }
 
-- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) {
-    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-        
-        NSMutableArray *sectionContent = self.sectionsContent[indexPath.section];
-        [sectionContent removeObjectAtIndex:indexPath.row];
-        
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        
-        [self.tableView setEditing:NO animated:YES];
-    }];
-    deleteAction.backgroundColor = [UIColor redColor];
-    
-    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
-    
-    return config;
-}
-
-- (nullable UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos) {
-    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:@"Delete" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-        
-        NSMutableArray *sectionContent = self.sectionsContent[indexPath.section];
-        [sectionContent removeObjectAtIndex:indexPath.row];
-        
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-        
-        [self.tableView setEditing:NO animated:YES];
-    }];
-    deleteAction.backgroundColor = [UIColor redColor];
-    
-    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
-    
-    return config;
-}
-
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     SectionHeaderView *headerView = [self.tableView dequeueReusableHeaderFooterViewWithIdentifier:sectionCellReuseId];
     headerView.delegate = self;
