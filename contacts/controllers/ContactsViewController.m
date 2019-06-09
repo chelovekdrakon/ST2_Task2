@@ -8,7 +8,9 @@
 
 #import "ContactsViewController.h"
 
-@interface ContactsViewController ()
+NSString * const defaultCellReuseId = @"default";
+
+@interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @end
 
@@ -17,8 +19,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"Contacts View Controller loaded");
+    self.navigationItem.title = @"Контакты";
+    
+    self.model = @[@"1", @"2", @"3", @"4", @"5"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:defaultCellReuseId];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"ContactsViewController appeared");
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.model.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"");
+    return nil;
+}
 
 @end

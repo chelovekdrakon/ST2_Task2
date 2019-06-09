@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ContactsViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *model;
 @end

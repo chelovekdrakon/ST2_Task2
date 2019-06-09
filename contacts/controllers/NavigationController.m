@@ -17,10 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CGSize controllerSize = self.view.frame.size;
-    CGSize width = [UIScreen mainScreen].bounds.size;
-    
     NSLog(@"NavigationController loaded");
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"NavigationController appeared");
 }
 
 @end
