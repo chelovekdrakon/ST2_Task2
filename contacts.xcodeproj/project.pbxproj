@@ -8,20 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		326F454322AB8AEA008E9580 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F454222AB8AEA008E9580 /* AppDelegate.m */; };
-		326F454622AB8AEA008E9580 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F454522AB8AEA008E9580 /* ViewController.m */; };
 		326F454B22AB8AEB008E9580 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 326F454A22AB8AEB008E9580 /* Assets.xcassets */; };
 		326F455122AB8AEB008E9580 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 326F455022AB8AEB008E9580 /* main.m */; };
+		32E0B75D22AD0ECF00213759 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E0B75C22AD0ECF00213759 /* NavigationController.m */; };
+		32E0B76122AD0F7A00213759 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E0B75F22AD0F7A00213759 /* ContactsViewController.m */; };
+		32E0B76222AD0F7A00213759 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32E0B76022AD0F7A00213759 /* ContactsViewController.xib */; };
+		32E0B76422AD106700213759 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E0B76322AD106700213759 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		326F453E22AB8AEA008E9580 /* contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		326F454122AB8AEA008E9580 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		326F454222AB8AEA008E9580 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		326F454422AB8AEA008E9580 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		326F454522AB8AEA008E9580 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		326F454A22AB8AEB008E9580 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		326F454F22AB8AEB008E9580 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		326F455022AB8AEB008E9580 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32E0B75B22AD0ECF00213759 /* NavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		32E0B75C22AD0ECF00213759 /* NavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		32E0B75E22AD0F7A00213759 /* ContactsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		32E0B75F22AD0F7A00213759 /* ContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
+		32E0B76022AD0F7A00213759 /* ContactsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsViewController.xib; sourceTree = "<group>"; };
+		32E0B76322AD106700213759 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,15 +61,27 @@
 		326F454022AB8AEA008E9580 /* contacts */ = {
 			isa = PBXGroup;
 			children = (
+				32E0B72F22AD076600213759 /* controllers */,
 				326F454122AB8AEA008E9580 /* AppDelegate.h */,
 				326F454222AB8AEA008E9580 /* AppDelegate.m */,
-				326F454422AB8AEA008E9580 /* ViewController.h */,
-				326F454522AB8AEA008E9580 /* ViewController.m */,
 				326F454A22AB8AEB008E9580 /* Assets.xcassets */,
+				32E0B76322AD106700213759 /* LaunchScreen.storyboard */,
 				326F454F22AB8AEB008E9580 /* Info.plist */,
 				326F455022AB8AEB008E9580 /* main.m */,
 			);
 			path = contacts;
+			sourceTree = "<group>";
+		};
+		32E0B72F22AD076600213759 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				32E0B75E22AD0F7A00213759 /* ContactsViewController.h */,
+				32E0B75F22AD0F7A00213759 /* ContactsViewController.m */,
+				32E0B76022AD0F7A00213759 /* ContactsViewController.xib */,
+				32E0B75B22AD0ECF00213759 /* NavigationController.h */,
+				32E0B75C22AD0ECF00213759 /* NavigationController.m */,
+			);
+			path = controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,7 +141,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				32E0B76422AD106700213759 /* LaunchScreen.storyboard in Resources */,
 				326F454B22AB8AEB008E9580 /* Assets.xcassets in Resources */,
+				32E0B76222AD0F7A00213759 /* ContactsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +154,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				326F454622AB8AEA008E9580 /* ViewController.m in Sources */,
+				32E0B75D22AD0ECF00213759 /* NavigationController.m in Sources */,
+				32E0B76122AD0F7A00213759 /* ContactsViewController.m in Sources */,
 				326F455122AB8AEB008E9580 /* main.m in Sources */,
 				326F454322AB8AEA008E9580 /* AppDelegate.m in Sources */,
 			);
