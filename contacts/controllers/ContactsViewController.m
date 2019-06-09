@@ -134,6 +134,10 @@ typedef enum {
 
 #pragma mark - UITableViewDelegate Protocol
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
@@ -148,6 +152,8 @@ typedef enum {
         [self.tableView setEditing:NO animated:YES];
     }];
     
+    deleteAction.backgroundColor = [UIColor redColor];
+    
     return @[deleteAction];
 }
 
@@ -161,10 +167,9 @@ typedef enum {
         
         [self.tableView setEditing:NO animated:YES];
     }];
+    deleteAction.backgroundColor = [UIColor redColor];
     
-    NSArray *actions = @[deleteAction];
-    
-    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:actions];
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
     
     return config;
 }
@@ -179,10 +184,9 @@ typedef enum {
         
         [self.tableView setEditing:NO animated:YES];
     }];
+    deleteAction.backgroundColor = [UIColor redColor];
     
-    NSArray *actions = @[deleteAction];
-    
-    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:actions];
+    UISwipeActionsConfiguration *config = [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
     
     return config;
 }
