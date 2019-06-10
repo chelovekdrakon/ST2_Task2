@@ -135,8 +135,10 @@ typedef enum {
     
     if (nextState == OPENED) {
         [self.tableView insertRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+        headerView.arrowView.image = self.openSectionImage;
     } else {
         [self.tableView deleteRowsAtIndexPaths:paths withRowAnimation:UITableViewRowAnimationAutomatic];
+        headerView.arrowView.image = self.closedSectionImage;
     }
 }
 
@@ -193,19 +195,20 @@ typedef enum {
     
     headerView.textLabel.text = text;
     
-//    CGSize headerSize = headerView.frame.size;
-//    CGSize imageSize = self.openSectionImage.size;
-//    int padding = 10;
-//
-//    CGRect arrowRect = CGRectMake(headerSize.width - padding - imageSize.width,
-//                                       headerSize.height - padding - imageSize.height,
-//                                       imageSize.width,
-//                                       imageSize.height);
-//
-//    UIImageView *arrowView = [[UIImageView alloc] initWithFrame:arrowRect];
-//    arrowView.image = self.openSectionImage;
-//
-//    [headerView addSubview:arrowView];
+   CGFloat width = self.tableView.frame.size.width;
+   CGSize imageSize = self.openSectionImage.size;
+   int padding = 10;
+
+   CGRect arrowRect = CGRectMake(width - padding - imageSize.width,
+                                      5,
+                                      imageSize.width,
+                                      imageSize.height);
+
+   UIImageView *arrowView = [[UIImageView alloc] initWithFrame:arrowRect];
+   arrowView.image = self.openSectionImage;
+
+    headerView.arrowView = arrowView;
+   [headerView addSubview:arrowView];
     
     return headerView;
 }
