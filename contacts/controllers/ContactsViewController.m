@@ -10,6 +10,7 @@
 
 #import "ContactsViewController.h"
 #import "SectionHeaderView.h"
+#import "AcessoryView.h"
 
 NSString * const defaultCellReuseId = @"default";
 NSString * const sectionCellReuseId = @"default";
@@ -18,7 +19,7 @@ typedef enum {
     OPENED = 1
 } SectionState;
 
-@interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource, SectionHeaderViewProtocol>
+@interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource, SectionHeaderViewDelegate, AcessoryViewDelegate>
 @property (strong, nonatomic) NSMutableArray *sectionsModelState;
 @end
 
@@ -210,21 +211,20 @@ typedef enum {
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", contact.givenName, contact.familyName];
     
-    UIImage *infoImage = [UIImage imageNamed:@"info"];
-    UIImageView *acessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, infoImage.size.width, infoImage.size.height)];
-    acessoryView.image = infoImage;
-    
-    acessoryView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleInfoPress:)];
-    [acessoryView addGestureRecognizer:tapRecognizer];
+    AcessoryView *acessoryView = [[AcessoryView alloc] init];
+    acessoryView.delegate = self;
+    acessoryView.contact = contact;
     
     cell.accessoryView = acessoryView;
     
     return cell;
 }
 
-- (void)handleInfoPress:(id)sender {
-    NSLog(@"info pressed");
+#pragma mark - AcessoryViewDelegate
+
+- (void)onAcessoryViewTap:(AcessoryView *)view {
+    NSLog(@"Acessory View Tapped");
+//    UIAlertController *alertController = UIAlertController alertControllerWithTitle:@"Hello" message:<#(nullable NSString *)#> preferredStyle:<#(UIAlertControllerStyle)#>
 }
 
 @end

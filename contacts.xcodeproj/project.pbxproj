@@ -15,6 +15,7 @@
 		32E0B76222AD0F7A00213759 /* ContactsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32E0B76022AD0F7A00213759 /* ContactsViewController.xib */; };
 		32E0B76422AD106700213759 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32E0B76322AD106700213759 /* LaunchScreen.storyboard */; };
 		32E0B76A22AD5B5E00213759 /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32E0B76922AD5B5E00213759 /* SectionHeaderView.m */; };
+		32EF0D4B22AE3B8C001C7CCB /* AcessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EF0D4A22AE3B8C001C7CCB /* AcessoryView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		32E0B76322AD106700213759 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		32E0B76822AD5B5E00213759 /* SectionHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
 		32E0B76922AD5B5E00213759 /* SectionHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
+		32EF0D4922AE3B8C001C7CCB /* AcessoryView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AcessoryView.h; sourceTree = "<group>"; };
+		32EF0D4A22AE3B8C001C7CCB /* AcessoryView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AcessoryView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 		32E0B76722AD5ACA00213759 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				32EF0D4922AE3B8C001C7CCB /* AcessoryView.h */,
+				32EF0D4A22AE3B8C001C7CCB /* AcessoryView.m */,
 				32E0B76822AD5B5E00213759 /* SectionHeaderView.h */,
 				32E0B76922AD5B5E00213759 /* SectionHeaderView.m */,
 			);
@@ -168,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				32E0B75D22AD0ECF00213759 /* NavigationController.m in Sources */,
+				32EF0D4B22AE3B8C001C7CCB /* AcessoryView.m in Sources */,
 				32E0B76122AD0F7A00213759 /* ContactsViewController.m in Sources */,
 				326F455122AB8AEB008E9580 /* main.m in Sources */,
 				32E0B76A22AD5B5E00213759 /* SectionHeaderView.m in Sources */,

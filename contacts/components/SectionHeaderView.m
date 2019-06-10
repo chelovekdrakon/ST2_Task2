@@ -24,7 +24,7 @@
 }
 
 - (void)handleTap:(UITapGestureRecognizer *)tapRecognizer {
-    if ([self.delegate conformsToProtocol:@protocol(SectionHeaderViewProtocol)]) {
+    if ([self.delegate conformsToProtocol:@protocol(SectionHeaderViewDelegate)]) {
         [self.delegate onSectionTap:self];
     }
 }

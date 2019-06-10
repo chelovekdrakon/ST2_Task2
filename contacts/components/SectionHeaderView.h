@@ -10,11 +10,11 @@
 
 @class SectionHeaderView;
 
-@protocol SectionHeaderViewProtocol <NSObject>
+@protocol SectionHeaderViewDelegate <NSObject>
 - (void) onSectionTap:(SectionHeaderView *)view;
 @end
 
 @interface SectionHeaderView : UITableViewHeaderFooterView
-@property (weak, nonatomic) id <SectionHeaderViewProtocol> delegate;
+@property (weak, nonatomic) id <SectionHeaderViewDelegate> delegate;
 @property (assign, nonatomic) NSInteger section;
 @end
