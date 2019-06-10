@@ -17,4 +17,5 @@
 @interface SectionHeaderView : UITableViewHeaderFooterView
 @property (weak, nonatomic) id <SectionHeaderViewDelegate> delegate;
 @property (assign, nonatomic) NSInteger section;
+@property (assign, nonatomic) NSInteger amountOfContacts;
 @end

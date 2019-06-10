@@ -21,12 +21,17 @@ typedef enum {
 
 @interface ContactsViewController () <UITableViewDelegate, UITableViewDataSource, SectionHeaderViewDelegate, AcessoryViewDelegate>
 @property (strong, nonatomic) NSMutableArray *sectionsModelState;
+@property (strong, nonatomic) UIImage *openSectionImage;
+@property (strong, nonatomic) UIImage *closedSectionImage;
 @end
 
 @implementation ContactsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.openSectionImage = [UIImage imageNamed:@"arrow_down"];
+    self.closedSectionImage = [UIImage imageNamed:@"arrow_up"];
     
     self.sectionsModel = [NSMutableArray new];
     self.sectionsContent = [NSMutableArray new];
@@ -182,7 +187,25 @@ typedef enum {
     headerView.delegate = self;
     headerView.section = section;
     
-    headerView.textLabel.text = self.sectionsModel[section];
+    NSString *text = [NSString stringWithFormat:@"%@ контактов: %@",
+                      self.sectionsModel[section],
+                      @([self.sectionsContent[section] count])];
+    
+    headerView.textLabel.text = text;
+    
+//    CGSize headerSize = headerView.frame.size;
+//    CGSize imageSize = self.openSectionImage.size;
+//    int padding = 10;
+//
+//    CGRect arrowRect = CGRectMake(headerSize.width - padding - imageSize.width,
+//                                       headerSize.height - padding - imageSize.height,
+//                                       imageSize.width,
+//                                       imageSize.height);
+//
+//    UIImageView *arrowView = [[UIImageView alloc] initWithFrame:arrowRect];
+//    arrowView.image = self.openSectionImage;
+//
+//    [headerView addSubview:arrowView];
     
     return headerView;
 }
