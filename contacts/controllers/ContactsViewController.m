@@ -223,8 +223,20 @@ typedef enum {
 #pragma mark - AcessoryViewDelegate
 
 - (void)onAcessoryViewTap:(AcessoryView *)view {
-    NSLog(@"Acessory View Tapped");
-//    UIAlertController *alertController = UIAlertController alertControllerWithTitle:@"Hello" message:<#(nullable NSString *)#> preferredStyle:<#(UIAlertControllerStyle)#>
+    NSString *contactName = [NSString stringWithFormat:@"%@ %@", view.contact.givenName, view.contact.familyName];
+    NSString *phoneNumber = [NSString stringWithFormat:@"%@", view.contact.phoneNumbers.count ? [view.contact.phoneNumbers[0].value stringValue] : @"-"];
+    NSString *message = [NSString stringWithFormat:@"Контакт %@, номер телефона %@", contactName, phoneNumber];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *alertAction = [UIAlertAction actionWithTitle:@"ОК" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"Alert closed!");
+    }];
+    
+    [alertController addAction:alertAction];
+    [self.navigationController presentViewController:alertController animated:YES completion:^{
+        NSLog(@"Alert presented!");
+    }];
 }
 
 @end
