@@ -52,20 +52,35 @@ typedef enum {
             NSError *error;
             
             NSMutableDictionary *contacts = [NSMutableDictionary new];
+            NSMutableArray *otherContacts = [NSMutableArray new];
             
             BOOL success = [store enumerateContactsWithFetchRequest:request error:&error usingBlock:^(CNContact * __nonnull contact, BOOL * __nonnull stop) {
                 if (error) {
                     NSLog(@"error fetching contacts %@", error);
                 } else {
-                    NSString *letter = [contact.familyName substringToIndex:1];
-                    NSMutableArray *sectionModel = [contacts objectForKey:letter];
+                    NSString *baseName = contact.familyName.length ? contact.familyName : contact.givenName;
+                    NSString *letter = baseName.length ? [baseName substringToIndex:1] : @"#";
                     
-                    if (!sectionModel) {
-                        sectionModel = [NSMutableArray new];
-                        [contacts setObject:sectionModel forKey:letter];
+                    NSError *error = NULL;
+                    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\b([a-zA-Z]|[ЁёА-я])\\b"
+                                                                                           options:NSRegularExpressionCaseInsensitive
+                                                                                             error:&error];
+                    NSUInteger isAlphabetical = [regex numberOfMatchesInString:letter
+                                                      options:0
+                                                         range:NSMakeRange(0, 1)];
+                    
+                    if (isAlphabetical) {
+                        NSMutableArray *sectionModel = [contacts objectForKey:letter];
+                        
+                        if (!sectionModel) {
+                            sectionModel = [NSMutableArray new];
+                            [contacts setObject:sectionModel forKey:letter];
+                        }
+                        
+                        [sectionModel addObject:contact];
+                    } else {
+                        [otherContacts addObject:contact];
                     }
-                    
-                    [sectionModel addObject:contact];
                 }
             }];
             
@@ -74,7 +89,7 @@ typedef enum {
             }
             
             [self.sectionsModel sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                return [obj1 compare:obj2];
+                return [obj1 compare:obj2 options:NSLiteralSearch range:NSMakeRange(0, 1) locale:[NSLocale localeWithLocaleIdentifier:@"RU"]];
             }];
             
             for (NSString *key in self.sectionsModel) {
@@ -82,6 +97,10 @@ typedef enum {
                 [self.sectionsContent addObject:sectionContent];
                 [self.sectionsModelState addObject:@(OPENED)];
             }
+            
+            [self.sectionsModel addObject:@"#"];
+            [self.sectionsContent addObject:otherContacts];
+            [self.sectionsModelState addObject:@(OPENED)];
             
             [self.tableView reloadData];
         } else {
