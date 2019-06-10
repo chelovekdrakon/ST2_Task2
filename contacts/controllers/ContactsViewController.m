@@ -210,7 +210,21 @@ typedef enum {
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", contact.givenName, contact.familyName];
     
+    UIImage *infoImage = [UIImage imageNamed:@"info"];
+    UIImageView *acessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, infoImage.size.width, infoImage.size.height)];
+    acessoryView.image = infoImage;
+    
+    acessoryView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleInfoPress:)];
+    [acessoryView addGestureRecognizer:tapRecognizer];
+    
+    cell.accessoryView = acessoryView;
+    
     return cell;
+}
+
+- (void)handleInfoPress:(id)sender {
+    NSLog(@"info pressed");
 }
 
 @end
