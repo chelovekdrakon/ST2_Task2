@@ -105,9 +105,11 @@ typedef enum {
                 [self.sectionsModelState addObject:@(OPENED)];
             }
             
-            [self.sectionsModel addObject:@"#"];
-            [self.sectionsContent addObject:otherContacts];
-            [self.sectionsModelState addObject:@(OPENED)];
+            if ([otherContacts count]) {
+                [self.sectionsModel addObject:@"#"];
+                [self.sectionsContent addObject:otherContacts];
+                [self.sectionsModelState addObject:@(OPENED)];
+            }
             
             [self.tableView reloadData];
         } else {
