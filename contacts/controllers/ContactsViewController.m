@@ -9,6 +9,7 @@
 #import <Contacts/Contacts.h>
 
 #import "ContactsViewController.h"
+#import "DetailViewController.h"
 #import "SectionHeaderView.h"
 #import "AcessoryView.h"
 
@@ -163,6 +164,31 @@ typedef enum {
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSMutableArray *sectionContent = self.sectionsContent[indexPath.section];
+    CNContact *contact = sectionContent[indexPath.row];
+    
+    DetailViewController *vc = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+    
+    NSMutableArray *phoneNumbers = [NSMutableArray new];
+    
+    for (CNLabeledValue *phoneNumber in contact.phoneNumbers) {
+        [phoneNumbers addObject:[[phoneNumber value] stringValue]];
+    }
+    vc.phoneNumbers = phoneNumbers;
+    
+    NSString *labelText = [NSString stringWithFormat:@"%@ %@", contact.familyName, contact.givenName];
+    
+    vc.nameLabel.text = labelText;
+    [vc.nameLabel sizeToFit];
+    
+    if (contact.imageData) {
+        vc.imageView.image = [UIImage imageWithData:contact.imageData];
+    }
+    
+    [vc.tableView reloadData];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
