@@ -221,17 +221,23 @@ typedef enum {
    CGFloat width = self.tableView.frame.size.width;
    CGSize imageSize = self.openSectionImage.size;
    int padding = 10;
-
-   CGRect arrowRect = CGRectMake(width - padding - imageSize.width,
-                                      5,
-                                      imageSize.width,
-                                      imageSize.height);
+    
+    CGRect arrowRect = CGRectMake(0, 0, imageSize.width, imageSize.height);
 
    UIImageView *arrowView = [[UIImageView alloc] initWithFrame:arrowRect];
    arrowView.image = self.openSectionImage;
 
     headerView.arrowView = arrowView;
    [headerView addSubview:arrowView];
+    
+    arrowView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [NSLayoutConstraint
+     activateConstraints:@[
+                           [arrowView.rightAnchor constraintEqualToAnchor:headerView.rightAnchor constant:-20.f],
+                           [arrowView.topAnchor constraintEqualToAnchor:headerView.topAnchor constant:5.f],
+                           ]
+     ];
     
     return headerView;
 }

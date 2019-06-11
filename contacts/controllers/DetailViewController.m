@@ -29,6 +29,23 @@ NSString * const cellReuseId = @"phoneNumberCell";
     self.nameLabel.text = self.labelText;
     
     [self.nameLabel sizeToFit];
+    
+    self.nameLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [NSLayoutConstraint
+     activateConstraints:@[
+                           [self.imageView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+                           [self.imageView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:100.f],
+                           [self.nameLabel.centerXAnchor constraintEqualToAnchor:self.imageView.centerXAnchor],
+                           [self.nameLabel.topAnchor constraintEqualToAnchor:self.imageView.bottomAnchor constant:10.f],
+                           [self.tableView.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:10.f],
+                           [self.tableView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+                           [self.tableView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor],
+                           [self.tableView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+                           ]
+     ];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
