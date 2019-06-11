@@ -48,8 +48,21 @@ NSString * const cellReuseId = @"phoneNumberCell";
      ];
 }
 
+#pragma mark - Controller Life Cycle
+
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"view did appear");
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSString *phoneNumber = self.phoneNumbers[indexPath.row];
+    
+    [[UIApplication sharedApplication]
+     openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel:%@", phoneNumber]]];
 }
 
 #pragma mark - UITableViewDataSource
