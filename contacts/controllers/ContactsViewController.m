@@ -177,16 +177,11 @@ typedef enum {
     }
     vc.phoneNumbers = phoneNumbers;
     
-    NSString *labelText = [NSString stringWithFormat:@"%@ %@", contact.familyName, contact.givenName];
-    
-    vc.nameLabel.text = labelText;
-    [vc.nameLabel sizeToFit];
+    vc.labelText = [NSString stringWithFormat:@"%@ %@", contact.familyName, contact.givenName];
     
     if (contact.imageData) {
-        vc.imageView.image = [UIImage imageWithData:contact.imageData];
+        vc.userAvatar = [UIImage imageWithData:contact.imageData];
     }
-    
-    [vc.tableView reloadData];
     
     [self.navigationController pushViewController:vc animated:YES];
 }

@@ -21,6 +21,18 @@ NSString * const cellReuseId = @"phoneNumberCell";
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellReuseId];
     self.tableView.tableFooterView = [UIView new];
+    
+    if (self.userAvatar) {
+        self.imageView.image = self.userAvatar;
+    }
+    
+    self.nameLabel.text = self.labelText;
+    
+    [self.nameLabel sizeToFit];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"view did appear");
 }
 
 #pragma mark - UITableViewDataSource

@@ -12,5 +12,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @property (strong, nonatomic) NSArray <NSString *> *phoneNumbers;
+@property (strong, nonatomic) NSString *labelText;
+@property (strong, nonatomic) UIImage *userAvatar;
 @end
